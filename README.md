@@ -1,2 +1,2 @@
-# raising_retake_student
-raising retake student
+# Raising_the_N-sudent
+Raising_the_N-sudent
