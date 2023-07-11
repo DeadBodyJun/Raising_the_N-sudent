@@ -13,6 +13,6 @@ public class SwitchingScene : MonoBehaviour
     }
     public void Update()
     {
-
+        Debug.Log("1");
     }
 }
