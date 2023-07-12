@@ -1,4 +1,4 @@
-using UnityEditor;
+/*using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
@@ -11,7 +11,7 @@ public class UIToolKit : EditorWindow
         MyCustomEditor wnd = GetWindow<MyCustomEditor>();
         wnd.titleContent = new GUIContent("MyCustomEditor");
     }
-    /*게임매니저 상속*/
+    /*게임매니저 상속
     [SerializeField]
     private VisualTreeAsset m_UXMLTree;
 
@@ -68,7 +68,7 @@ public class UIToolKit : EditorWindow
         VisualElement root = rootVisualElement;
 
         ++m_ClickCount;
-        /*게임매니저의 골드 받아와서 골드 늘어나는지 실험*/
+        /*게임매니저의 골드 받아와서 골드 늘어나는지 실험
         //Because of the names we gave the buttons and toggles, we can use the
         //button name to find the toggle name.
         Button button = evt.currentTarget as Button;
@@ -79,4 +79,4 @@ public class UIToolKit : EditorWindow
         Debug.Log("Button was clicked!" +
             (toggle.value ? " Count: " + m_ClickCount : ""));
     }
-}
+}*/
