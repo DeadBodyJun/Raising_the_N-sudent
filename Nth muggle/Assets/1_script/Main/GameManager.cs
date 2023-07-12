@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public float Health = 1f;
     public int Stress = 0;
     public double GameTime = 31536000.0f;                    //게임시간 365일을 초단위로 초기화
-
+    public int BuffTime = 50;
 
 
 
