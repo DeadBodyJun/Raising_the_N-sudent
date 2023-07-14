@@ -9,13 +9,22 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;               //static을 선언하여 다른 오브젝트 안의 스트립트에서도 호출 가능
-    public int Knolge;                                       //기본 지능 수치
-    public int Money;
-    public float Health = 1f;
+    public int Knolge = 0;                                       //기본 지능 수치
+    public int Money = 0;
+    public int Health = 0;
     public int Stress = 0;
     public double GameTime = 31536000.0f;                    //게임시간 365일을 초단위로 초기화
-    public int BuffTime = 50;
+    public int TouchKnolge = 2;                             // 터치 지능
+    public int BuffTime = 10;
 
+    public IEnumerator Time()
+    {
+        while (BuffTime > 0)
+        {
+            yield return new WaitForSeconds(1);
+            BuffTime--;
+        }
+    }
 
 
     public void Awake()

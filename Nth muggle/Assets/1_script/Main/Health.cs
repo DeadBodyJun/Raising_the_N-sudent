@@ -5,25 +5,39 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Drawing;
 
+
 public class Health : MonoBehaviour
 {
     public Image Bar; // 이미지 컴포넌트.
     private float Percent;      // 채우는 정도
     public float MaxHealth = 100f;  // 최대 체력
+    public bool isScreenOn = true; // 화면 상태 저장
+    private float ingTime = 0f; // 경과 시간
+    
+
     void Start()
     {
 
     }
     void Update()
     {
-        if (GameManager.instance.Health < 100)
+        if (isScreenOn) // 화면이 켜져 있는 동안에만 실행
         {
-            GameManager.instance.Health += Time.deltaTime / 3;  // 건강이 최대치가 아니면 증가 됨
+            ingTime += Time.deltaTime; // 경과 시간 누적
+            if (GameManager.instance.Health <= 99)
+            {
+                if (ingTime >= 2) // 2초 간격으로
+                {
+                    GameManager.instance.Health += 1;
+                    ingTime = 0f; // 경과 시간 초기화
+                }
+            }
+           
+            Percent = GameManager.instance.Health / MaxHealth; //최대 hp분의 현재 hp
+            Bar.fillAmount = Percent; // 채우는 정도 = 퍼센트
         }
-        Percent = GameManager.instance.Health / MaxHealth; //최대 hp분의 현재 hp
-        Bar.fillAmount = Percent; // 채우는 정도 = 퍼센트
-
     }
+    
     public void HpClick()
     {
         if(GameManager.instance.Health < 90)

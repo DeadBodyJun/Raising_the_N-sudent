@@ -9,19 +9,16 @@ public class KnowledgeCount : MonoBehaviour
 {
 
     public Text Count;
-    public GameObject Knowledge;
     public Button Touch;
     public bool isScreenOn = true; // 화면 상태 저장
     private GameManager gameManager; // GameManager 참조
     private float ingTime = 0f; // 경과 시간
 
-    // Start is called before the first frame update
     void Start()
     {
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         Count.text = "지능 : " + GameManager.instance.Knolge;
@@ -36,6 +33,7 @@ public class KnowledgeCount : MonoBehaviour
             }
         }
     }
+
     public void TouchButton()
     {
         GameManager.instance.Knolge += 5;
