@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SpendMoney : MonoBehaviour
 {
+    public int time=60;
     public void BuyLowBook()
     {
         GameManager.instance.Money -= 10000;
@@ -24,8 +25,15 @@ public class SpendMoney : MonoBehaviour
         GameManager.instance.Money -= 5000;
         GameManager.instance.Health += 30;
     }
-    public void BuyMp()
+    IEnumerator BuyMp()
     {
         GameManager.instance.Money -= 5000;
+        GameManager.instance.TouchKnolge = GameManager.instance.TouchKnolge * 5;
+        while (time >= 0) {
+            yield return new WaitForSeconds(1);
+            time--;
+        }
+        GameManager.instance.TouchKnolge = GameManager.instance.TouchKnolge / 5;
+        time = 60;
     }
 }
