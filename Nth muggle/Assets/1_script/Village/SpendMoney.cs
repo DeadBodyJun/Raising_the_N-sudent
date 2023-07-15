@@ -25,13 +25,6 @@ public class SpendMoney : MonoBehaviour
         GameManager.instance.Money -= 5000;
         GameManager.instance.Health += 30;
     }
-    public void BuyMp()
-    {
-        GameManager.instance.Money -= 5000;
-        GameManager.instance.TouchKnolge = GameManager.instance.TouchKnolge * 5;
-        BuffTime();
-        GameManager.instance.TouchKnolge = GameManager.instance.TouchKnolge / 5;
-    }
     IEnumerator BuffTime()
     {
         while (time >= 0) {
@@ -40,4 +33,19 @@ public class SpendMoney : MonoBehaviour
         }
         time = 60;
     }
+    public void BuyMp()
+    {
+        GameManager.instance.StartCoroutine(GameManager.instance.Time());
+        if (GameManager.instance.BuffTime > 0)
+        {
+            GameManager.instance.Money -= 5000;
+            GameManager.instance.TouchKnolge = GameManager.instance.TouchKnolge * 10;
+        }
+        if (GameManager.instance.BuffTime == 0)
+        {
+            GameManager.instance.BuffTime = 10;
+            GameManager.instance.TouchKnolge = GameManager.instance.TouchKnolge / 10;
+        }
+    }
+
 }
