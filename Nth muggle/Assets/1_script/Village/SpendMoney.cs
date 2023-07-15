@@ -25,15 +25,19 @@ public class SpendMoney : MonoBehaviour
         GameManager.instance.Money -= 5000;
         GameManager.instance.Health += 30;
     }
-    IEnumerator BuyMp()
+    public void BuyMp()
     {
         GameManager.instance.Money -= 5000;
         GameManager.instance.TouchKnolge = GameManager.instance.TouchKnolge * 5;
+        BuffTime();
+        GameManager.instance.TouchKnolge = GameManager.instance.TouchKnolge / 5;
+    }
+    IEnumerator BuffTime()
+    {
         while (time >= 0) {
             yield return new WaitForSeconds(1);
             time--;
         }
-        GameManager.instance.TouchKnolge = GameManager.instance.TouchKnolge / 5;
         time = 60;
     }
 }
