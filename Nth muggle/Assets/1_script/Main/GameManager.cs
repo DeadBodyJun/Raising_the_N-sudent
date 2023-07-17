@@ -5,27 +5,32 @@ using System.Collections.Generic;
 using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
+
+[System.Serializable]
+public class PlayerData
+{
+    public int Knolge;
+    public int Money;
+    public float Health;
+    public int Stress;
+    public double GameTime;
+    public int BuffTime;
+
+    //앞으로 GameManager에서 관리할 변수들은 여기에도 추가해야함.
+}
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;               //static을 선언하여 다른 오브젝트 안의 스트립트에서도 호출 가능
-    public int Knolge = 0;                                       //기본 지능 수치
-    public int Money = 0;
-    public int Health = 0;
+    public int Knolge;                                       //기본 지능 수치
+    public int Money;
+    public float Health = 1f;
     public int Stress = 0;
     public double GameTime = 31536000.0f;                    //게임시간 365일을 초단위로 초기화
-    public int TouchKnolge = 2;                             // 터치 지능
-    public int BuffTime = 10;
+    public int BuffTime = 50;
 
-    public IEnumerator Time()
-    {
-        while (BuffTime > 0)
-        {
-            yield return new WaitForSeconds(1);
-            BuffTime--;
-        }
-    }
-
+    private string savePath;
 
     public void Awake()
     {
@@ -42,5 +47,56 @@ public class GameManager : MonoBehaviour
                 Destroy(this.gameObject);                       //둘 이상 존재하면 안되므로 방금 Awake가 된 자신을 삭제
             }
         }
+
+        // 데이터 저장 경로 설정
+        savePath = Application.persistentDataPath + "/playerData.json";
+
+        // 게임 시작 시 저장된 데이터 불러오기
+        LoadPlayerData();
+        Debug.Log(savePath); // DB 저장경로 콘솔 출력
+    }
+
+    // 데이터를 JSON으로 직렬화하여 저장하는 함수
+    private void SavePlayerData(PlayerData playerData)
+    {
+        string jsonData = JsonUtility.ToJson(playerData);
+        File.WriteAllText(savePath, jsonData);
+    }
+
+    // JSON을 역직렬화하여 데이터를 불러오는 함수
+    private void LoadPlayerData()
+    {
+        if (File.Exists(savePath))
+        {
+            string jsonData = File.ReadAllText(savePath);
+            PlayerData loadedData = JsonUtility.FromJson<PlayerData>(jsonData);
+
+            // 불러온 데이터를 현재 변수에 적용
+            Knolge = loadedData.Knolge;
+            Money = loadedData.Money;
+            Health = loadedData.Health;
+            Stress = loadedData.Stress;
+            GameTime = loadedData.GameTime;
+            BuffTime = loadedData.BuffTime;
+
+            //앞으로 GameManager에서 관리할 변수들은 여기에도 추가해야함.
+        }
+    }
+
+    // 게임 종료 시에 호출되는 함수
+    private void OnApplicationQuit()
+    {
+        PlayerData playerData = new PlayerData
+        {
+            Knolge = Knolge,
+            Money = Money,
+            Health = Health,
+            Stress = Stress,
+            GameTime = GameTime,
+            BuffTime = BuffTime
+
+            //앞으로 GameManager에서 관리할 변수들은 여기에도 추가해야함.
+        };
+        SavePlayerData(playerData);
     }
 }

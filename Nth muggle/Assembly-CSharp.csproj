@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{F2F9DC6A-DF2F-522D-1283-8BB760963163}</ProjectGuid>
+    <ProjectGuid>{00D5C5CE-5137-9CF6-FB0A-41FA774C3062}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -58,14 +58,15 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.4f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\1_script\Main\Real Time1.cs" />
     <Compile Include="Assets\1_script\Main\KnowledgeCount.cs" />
+    <Compile Include="Assets\1_script\Village\Spend Money.cs" />
     <Compile Include="Assets\1_script\Include\Save.cs" />
     <Compile Include="Assets\1_script\Main\Real Time.cs" />
     <Compile Include="Assets\1_script\Main\GameManager.cs" />
     <Compile Include="Assets\1_script\Include\SwitchingScene.cs" />
     <Compile Include="Assets\1_script\Main\Ending.cs" />
     <Compile Include="Assets\1_script\Village\MakeMoney.cs" />
+    <Compile Include="Assets\1_script\Main\Health.cs" />
     <Compile Include="Assets\1_script\Main\GetKnowledge.cs" />
     <Compile Include="Assets\1_script\Intro\StartGame.cs" />
   </ItemGroup>

@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,14 +28,14 @@ public class SpendMoney : MonoBehaviour
         GameManager.instance.Money -= 5000;
         GameManager.instance.Health += 30;
     }
-    /*IEnumerator Time()
+    IEnumerator Time()
     {
         while (GameManager.instance.BuffTime > 0)
         {
             yield return new WaitForSeconds(1);
             GameManager.instance.BuffTime--;
         }
-    }*/
+    }
     public void BuyMp()
     {
         GameManager.instance.StartCoroutine(GameManager.instance.Time());
@@ -50,4 +50,4 @@ public class SpendMoney : MonoBehaviour
             GameManager.instance.TouchKnolge = GameManager.instance.TouchKnolge / 10;
         }
     }
-}
+}*/
