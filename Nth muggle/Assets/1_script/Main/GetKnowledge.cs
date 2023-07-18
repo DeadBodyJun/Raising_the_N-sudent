@@ -17,7 +17,7 @@ public class GetKnowledge : MonoBehaviour
 
     public void Click()
     {
-        GameManager.instance.Knolge += GameManager.instance.TouchKnolge;          //게임매니저에 있는 지능값 터치지능값 수치 만큼 증가
+        GameManager.instance.Knolge += 2;          //게임매니저에 있는 지능값 증가
         Debug.Log("Knowledge");
     }
 
@@ -33,7 +33,7 @@ public class GetKnowledge : MonoBehaviour
             {
                 if (Input.GetTouch(0).phase == TouchPhase.Began)                            //터치 1회 실행할 경우
                 {
-                    GameManager.instance.Knolge += GameManager.instance.TouchKnolge;
+                    GameManager.instance.Knolge += 2;
                     Debug.Log("knowledge");
                 }
             }
