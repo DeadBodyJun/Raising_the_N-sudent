@@ -60,7 +60,6 @@
   <ItemGroup>
     <Compile Include="Assets\1_script\Main\KnowledgeCount.cs" />
     <Compile Include="Assets\1_script\Village\Spend Money.cs" />
-    <Compile Include="Assets\1_script\Include\Save.cs" />
     <Compile Include="Assets\1_script\Main\Real Time.cs" />
     <Compile Include="Assets\1_script\Main\GameManager.cs" />
     <Compile Include="Assets\1_script\Include\SwitchingScene.cs" />

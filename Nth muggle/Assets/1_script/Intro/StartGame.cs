@@ -19,7 +19,7 @@ public class StartGame : MonoBehaviour
         {
             if (Input.GetTouch(0).phase == TouchPhase.Began)                            //터치를 실행할 경우
             {
-                SceneManager.LoadScene("Main");                                         //"메인" 씬을 불러옴
+                SceneManager.LoadScene(SceneToLoad);                                         //"메인" 씬을 불러옴
             }
         }
     }

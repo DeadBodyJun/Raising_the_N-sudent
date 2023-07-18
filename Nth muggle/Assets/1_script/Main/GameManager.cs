@@ -1,4 +1,4 @@
-// 싱글톤 패턴
+// 싱글톤 패턴,Json
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,6 +15,7 @@ public class PlayerData
     public float Health;
     public int Stress;
     public double GameTime;
+    public string EndTime;
     public int BuffTime;
 
     //앞으로 GameManager에서 관리할 변수들은 여기에도 추가해야함.
@@ -27,7 +28,8 @@ public class GameManager : MonoBehaviour
     public int Money;
     public float Health = 1f;
     public int Stress = 0;
-    public double GameTime = 31536000.0f;                    //게임시간 365일을 초단위로 초기화
+    public double GameTime = 525600;                    //게임시간 365일로 초기화
+    public string EndTime;
     public int BuffTime = 50;
 
     private string savePath;
@@ -77,8 +79,8 @@ public class GameManager : MonoBehaviour
             Health = loadedData.Health;
             Stress = loadedData.Stress;
             GameTime = loadedData.GameTime;
+            EndTime = loadedData.EndTime;
             BuffTime = loadedData.BuffTime;
-
             //앞으로 GameManager에서 관리할 변수들은 여기에도 추가해야함.
         }
     }
@@ -93,8 +95,8 @@ public class GameManager : MonoBehaviour
             Health = Health,
             Stress = Stress,
             GameTime = GameTime,
-            BuffTime = BuffTime
-
+            EndTime = EndTime,
+            BuffTime = BuffTime,
             //앞으로 GameManager에서 관리할 변수들은 여기에도 추가해야함.
         };
         SavePlayerData(playerData);
