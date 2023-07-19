@@ -3,25 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class KnowledgeCount : MonoBehaviour
 {
 
     public Text Count;
-    public GameObject Knowledge;
-    public Button Touch;
     public bool isScreenOn = true; // 화면 상태 저장
-    private GameManager gameManager; // GameManager 참조
     private float ingTime = 0f; // 경과 시간
 
-    // Start is called before the first frame update
     void Start()
     {
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         Count.text = "지능 : " + GameManager.instance.Knolge;
@@ -35,15 +31,51 @@ public class KnowledgeCount : MonoBehaviour
                 ingTime = 0f; // 경과 시간 초기화
             }
         }
+
+        if (Input.touchCount > 0)                                                          //터치 카운트가 0보다 클 경우, 즉 터치가 될 경우
+        {
+            if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))    //만약 UI부분을 터치할 경우
+            {
+                return;                                                                     //아무 효과도 없음
+            }
+            else
+            {
+                if (Input.GetTouch(0).phase == TouchPhase.Began)                            //터치 1회 실행할 경우
+                {
+                    GameManager.instance.Knolge += 2;
+                }
+            }
+        }
     }
-    public void TouchButton()
+    /*뭔지 모르겠어서 일단 지우고 GetKnowledge 스크립트 긁어옴
+    public void Click()
     {
-        GameManager.instance.Knolge += 5;
-        //Debug.Log("터치");
+        if (Input.touchCount > 0)                                                          //터치 카운트가 0보다 클 경우, 즉 터치가 될 경우
+        {
+            if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))    //만약 UI부분을 터치할 경우
+            {
+                return;                                                                     //아무 효과도 없음
+            }
+            else
+            {
+                if (Input.GetTouch(0).phase == TouchPhase.Began)                            //터치 1회 실행할 경우
+                {
+                    GameManager.instance.Knolge += GameManager.instance.TouchKnolge;        //게임매니저에 있는 지능값 증가
+                    GameManager.instance.TouchStress ++;                                      // Stress 스크립트 연결
+                }
+            }
+        }          
     }
 
     public void OnApplicationFocus(bool focus)
     {
         isScreenOn = focus; // 화면이 켜져 있다는 뜻
+    }
+    */
+
+    public void Click()
+    {
+        GameManager.instance.Knolge += 2;          //게임매니저에 있는 지능값 증가
+        GameManager.instance.TouchStress++;     // Stress 스크립트 연결
     }
 }

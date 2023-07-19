@@ -18,9 +18,8 @@ public class GetKnowledge : MonoBehaviour
     public void Click()
     {
         GameManager.instance.Knolge += 2;          //게임매니저에 있는 지능값 증가
-        Debug.Log("Knowledge");
-    }
 
+    }
     public void Update()
     {
         if (Input.touchCount > 0)                                                          //터치 카운트가 0보다 클 경우, 즉 터치가 될 경우
@@ -34,7 +33,6 @@ public class GetKnowledge : MonoBehaviour
                 if (Input.GetTouch(0).phase == TouchPhase.Began)                            //터치 1회 실행할 경우
                 {
                     GameManager.instance.Knolge += 2;
-                    Debug.Log("knowledge");
                 }
             }
         }

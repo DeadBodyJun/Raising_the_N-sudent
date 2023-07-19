@@ -355,19 +355,11 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.4f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.4f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
-"Assets/1_script/Include/Save.cs"
-"Assets/1_script/Include/SwitchingScene.cs"
-"Assets/1_script/Intro/StartGame.cs"
-"Assets/1_script/Main/Ending.cs"
 "Assets/1_script/Main/GameManager.cs"
-"Assets/1_script/Main/GetKnowledge.cs"
-"Assets/1_script/Main/Health.cs"
 "Assets/1_script/Main/KnowledgeCount.cs"
-"Assets/1_script/Main/OtherHealth.cs"
-"Assets/1_script/Main/OtherKnowledge Count.cs"
-"Assets/1_script/Main/OtherReal Time.cs"
-"Assets/1_script/Main/Real Time.cs"
-"Assets/1_script/Village/MakeMoney.cs"
+"Assets/1_script/Main/Main.cs"
+"Assets/1_script/StatGame.cs"
+"Assets/1_script/SwitchingScene.cs"
 -langversion:9.0
 
 /deterministic

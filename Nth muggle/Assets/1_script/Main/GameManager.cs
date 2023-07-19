@@ -10,25 +10,31 @@ using System.IO;
 [System.Serializable]
 public class PlayerData
 {
-    public int Knolge;
+    public float Knolge;
     public int Money;
     public float Health;
     public int Stress;
     public double GameTime;
     public int BuffTime;
-
+    public float TouchKnolge;
+    public int TouchStress;
+    public int AlbaClick;
     //앞으로 GameManager에서 관리할 변수들은 여기에도 추가해야함.
 }
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;               //static을 선언하여 다른 오브젝트 안의 스트립트에서도 호출 가능
-    public int Knolge;                                       //기본 지능 수치
-    public int Money;
+    public float Knolge=0;                                       //기본 지능 수치
+    public int Money=0;
     public float Health = 1f;
     public int Stress = 0;
     public double GameTime = 31536000.0f;                    //게임시간 365일을 초단위로 초기화
     public int BuffTime = 50;
+    public float TouchKnolge = 0;
+    public int TouchStress = 0;              // Stress 스크립트
+    public int AlbaClick = 0;               // Stress 스크립트
+
 
     private string savePath;
 
@@ -55,6 +61,52 @@ public class GameManager : MonoBehaviour
         LoadPlayerData();
         Debug.Log(savePath); // DB 저장경로 콘솔 출력
     }
+    public GameManager player;
+    public float OriginalKnologe = 2f;
+    public GameObject BuffPreFab;
+
+    void Start()
+    {
+       // player.Knolge = OriginalKnologe;
+       
+    }
+
+    public List<BaseBuff> onBuff = new List<BaseBuff>();           //대상에 onBuff형태로 버프추가
+
+    public float BuffChange(string type, float origin)
+    {
+        if (onBuff.Count > 0)
+        {
+            float temp = 0;
+            for (int i = 0; i < onBuff.Count; i++)
+            {
+                if (onBuff[i].Type.Equals(type))
+                    temp += origin * onBuff[i].Percentage;
+            }
+             return origin + temp;
+        }
+        else
+        {
+             return origin;
+        }
+    }
+
+    public void ChooseBuff(string type)
+    {
+        switch (type)
+        {
+            case "Mp":
+                player.TouchKnolge = BuffChange(type, OriginalKnologe);
+                break;
+        }
+    }
+
+    public void CreateBuff(string type, float per, float du)//, Sprite icon)
+    {
+        GameObject go = Instantiate(BuffPreFab, transform);
+        go.GetComponent<BaseBuff>().Init(type, per, du);
+        // go.GetComponent<UnityEngine.UI.Image>().sprite = icon;
+    }
 
     // 데이터를 JSON으로 직렬화하여 저장하는 함수
     private void SavePlayerData(PlayerData playerData)
@@ -78,9 +130,11 @@ public class GameManager : MonoBehaviour
             Stress = loadedData.Stress;
             GameTime = loadedData.GameTime;
             BuffTime = loadedData.BuffTime;
-
-            //앞으로 GameManager에서 관리할 변수들은 여기에도 추가해야함.
-        }
+            TouchKnolge = loadedData.TouchKnolge;
+            TouchStress = loadedData.TouchStress;
+            AlbaClick = loadedData.AlbaClick;
+    //앞으로 GameManager에서 관리할 변수들은 여기에도 추가해야함.
+}
     }
 
     // 게임 종료 시에 호출되는 함수
@@ -93,9 +147,12 @@ public class GameManager : MonoBehaviour
             Health = Health,
             Stress = Stress,
             GameTime = GameTime,
-            BuffTime = BuffTime
+            BuffTime = BuffTime,
+            TouchKnolge = TouchKnolge,
+            TouchStress = TouchStress,
+            AlbaClick = AlbaClick
 
-            //앞으로 GameManager에서 관리할 변수들은 여기에도 추가해야함.
+            //앞으로 GameManager에서 관리할 변수들은 여기에도 추가해야함. 마지막 줄은 콤마 쓰지 말 것.
         };
         SavePlayerData(playerData);
     }

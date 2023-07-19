@@ -28,9 +28,6 @@ public class main : MonoBehaviour
         {
             SceneManager.LoadScene("PatientEnding");                                    //환자엔딩Scene으로 이동
         }
-        if (GameManager.instance.Money < -10000)                                        //돈값이 -10000이하일 경우
-        {
-            SceneManager.LoadScene("PoorEnding");                                       //거지엔딩Scene으로 이동
-        }
+        
     }
 }

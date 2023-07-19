@@ -12,6 +12,7 @@ public class MakeMoney : MonoBehaviour
     public void Click()
     {
         GameManager.instance.Money += 2;          //게임매니저에 있는 지능값 증가
+        GameManager.instance.AlbaClick ++; // Stress 스크립트 연결
         Debug.Log("Money");
     }
 
