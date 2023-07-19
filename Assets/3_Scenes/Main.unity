@@ -359,6 +359,12 @@ MonoBehaviour:
   Health: 1
   Stress: 0
   GameTime: 31536000
+  BuffTime: 50
+  TouchKnolge: 0
+  player: {fileID: 0}
+  OriginalKnologe: 2
+  BuffPreFab: {fileID: 3485291105832999873, guid: 3f126cfcefb2b7f4991526eaff138cd9, type: 3}
+  onBuff: []
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

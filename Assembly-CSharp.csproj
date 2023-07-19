@@ -65,6 +65,7 @@
     <Compile Include="Assets\1_script\Main\Real Time.cs" />
     <Compile Include="Assets\1_script\Main\BuffManager.cs" />
     <Compile Include="Assets\1_script\Main\GameManager.cs" />
+    <Compile Include="Assets\1_script\Village\CoolTime.cs" />
     <Compile Include="Assets\1_script\Include\SwitchingScene.cs" />
     <Compile Include="Assets\1_script\Main\Ending.cs" />
     <Compile Include="Assets\1_script\Village\MakeMoney.cs" />

@@ -23,13 +23,13 @@ public class PlayerData
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;               //static을 선언하여 다른 오브젝트 안의 스트립트에서도 호출 가능
-    public float Knolge;                                       //기본 지능 수치
-    public int Money;
+    public float Knolge=0;                                       //기본 지능 수치
+    public int Money=0;
     public float Health = 1f;
     public int Stress = 0;
     public double GameTime = 31536000.0f;                    //게임시간 365일을 초단위로 초기화
     public int BuffTime = 50;
-    public float TouchKnolge;
+    public float TouchKnolge = 0;
 
     private string savePath;
 
@@ -56,13 +56,13 @@ public class GameManager : MonoBehaviour
         LoadPlayerData();
         Debug.Log(savePath); // DB 저장경로 콘솔 출력
     }
-    public PlayerData player;
-    public float OriginalKnologe = 2;
-   
+    public GameManager player;
+    public float OriginalKnologe = 2f;
+    public GameObject BuffPreFab;
 
     void Start()
     {
-        player.Knolge = OriginalKnologe;
+       // player.Knolge = OriginalKnologe;
        
     }
 
@@ -78,11 +78,11 @@ public class GameManager : MonoBehaviour
                 if (onBuff[i].Type.Equals(type))
                     temp += origin * onBuff[i].Percentage;
             }
-            return origin + temp;
+             return origin + temp;
         }
         else
         {
-            return origin;
+             return origin;
         }
     }
 
@@ -91,9 +91,16 @@ public class GameManager : MonoBehaviour
         switch (type)
         {
             case "Mp":
-                player.Knolge = BuffChange(type, OriginalKnologe);
+                player.TouchKnolge = BuffChange(type, OriginalKnologe);
                 break;
         }
+    }
+
+    public void CreateBuff(string type, float per, float du)//, Sprite icon)
+    {
+        GameObject go = Instantiate(BuffPreFab, transform);
+        go.GetComponent<BaseBuff>().Init(type, per, du);
+        // go.GetComponent<UnityEngine.UI.Image>().sprite = icon;
     }
 
     // 데이터를 JSON으로 직렬화하여 저장하는 함수
@@ -118,9 +125,9 @@ public class GameManager : MonoBehaviour
             Stress = loadedData.Stress;
             GameTime = loadedData.GameTime;
             BuffTime = loadedData.BuffTime;
-
-            //앞으로 GameManager에서 관리할 변수들은 여기에도 추가해야함.
-        }
+            TouchKnolge = loadedData.TouchKnolge;
+    //앞으로 GameManager에서 관리할 변수들은 여기에도 추가해야함.
+}
     }
 
     // 게임 종료 시에 호출되는 함수
@@ -133,7 +140,8 @@ public class GameManager : MonoBehaviour
             Health = Health,
             Stress = Stress,
             GameTime = GameTime,
-            BuffTime = BuffTime
+            BuffTime = BuffTime,
+            TouchKnolge = TouchKnolge 
 
             //앞으로 GameManager에서 관리할 변수들은 여기에도 추가해야함.
         };

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class BaseBuff : MonoBehaviour
 {
-    public string Type;                                            //목표
+    public string Type= "TouchKnolge";                             //목표
     public float Percentage = 0.5f;                                //변형정도
     public float Duration = 10f;
     public float Currenttime = 10f;
@@ -50,6 +50,6 @@ public class BaseBuff : MonoBehaviour
     {
         GameManager.instance.onBuff.Remove(this);
         GameManager.instance.ChooseBuff(Type);
-        Destroy(gameObject);
+       
     }
 }

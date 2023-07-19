@@ -9,13 +9,9 @@ public class BuffManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        DontDestroyOnLoad(gameObject);
     }
-    public GameObject BuffPreFab;
+    
 
-    public void CreateBuff(string type, float per, float du)//, Sprite icon)
-    {
-        GameObject go = Instantiate(BuffPreFab, transform);
-        go.GetComponent<BaseBuff>().Init(type, per, du);
-       // go.GetComponent<UnityEngine.UI.Image>().sprite = icon;
-    }
+    
 }

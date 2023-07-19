@@ -367,6 +367,7 @@
 "Assets/1_script/Main/KnowledgeCount.cs"
 "Assets/1_script/Main/Real Time.cs"
 "Assets/1_script/Village/BuyMp.cs"
+"Assets/1_script/Village/CoolTime.cs"
 "Assets/1_script/Village/MakeMoney.cs"
 "Assets/1_script/Village/Spend Money.cs"
 -langversion:9.0
