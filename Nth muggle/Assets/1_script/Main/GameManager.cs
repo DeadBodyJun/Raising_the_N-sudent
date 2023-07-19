@@ -16,8 +16,13 @@ public class PlayerData
     public int Stress;
     public double GameTime;
     public int BuffTime;
-    public DateTime EndTime;
+    public int Year;
+    public int Month;
+    public int Day;
+    public int Hour;
+    public int Minute;
     public int Second;
+    public DateTime EndTime;
     //앞으로 GameManager에서 관리할 변수들은 여기에도 추가해야함.
 }
 
@@ -28,10 +33,15 @@ public class GameManager : MonoBehaviour
     public int Money;
     public float Health = 1f;
     public int Stress = 0;
-    public double GameTime = 525600;                    //게임시간 365일로 초기화
+    public double GameTime = 31104000;                    //게임시간 360일로 초기화
     public int BuffTime = 50;
-    public DateTime EndTime;
+    public int Year;
+    public int Month;
+    public int Day;
+    public int Hour;
+    public int Minute;
     public int Second;
+    public DateTime EndTime;
 
     private string savePath;
 
@@ -80,8 +90,13 @@ public class GameManager : MonoBehaviour
             Stress = loadedData.Stress;
             GameTime = loadedData.GameTime;
             BuffTime = loadedData.BuffTime;
-            EndTime = loadedData.EndTime;
+            Year = loadedData.Year;
+            Month = loadedData.Month;
+            Day = loadedData.Day;  
+            Hour = loadedData.Hour;
+            Minute = loadedData.Minute;
             Second = loadedData.Second;
+            EndTime = loadedData.EndTime;
             //앞으로 GameManager에서 관리할 변수들은 여기에도 추가해야함.
         }
     }
@@ -97,8 +112,13 @@ public class GameManager : MonoBehaviour
             Stress = Stress,
             GameTime = GameTime,
             BuffTime = BuffTime,
-            EndTime = EndTime,
+            Year = Year,
+            Month = Month,
+            Day = Day,
+            Hour = Hour,
+            Minute = Minute,
             Second = Second,
+            EndTime = EndTime
             //앞으로 GameManager에서 관리할 변수들은 여기에도 추가해야함.
 
         };
