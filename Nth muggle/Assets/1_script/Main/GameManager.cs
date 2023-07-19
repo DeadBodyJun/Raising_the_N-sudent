@@ -15,9 +15,9 @@ public class PlayerData
     public float Health;
     public int Stress;
     public double GameTime;
-    public string EndTime;
     public int BuffTime;
-
+    public DateTime EndTime;
+    public int Second;
     //앞으로 GameManager에서 관리할 변수들은 여기에도 추가해야함.
 }
 
@@ -29,14 +29,14 @@ public class GameManager : MonoBehaviour
     public float Health = 1f;
     public int Stress = 0;
     public double GameTime = 525600;                    //게임시간 365일로 초기화
-    public string EndTime;
     public int BuffTime = 50;
+    public DateTime EndTime;
+    public int Second;
 
     private string savePath;
 
     public void Awake()
     {
-
         if (instance == null)                                   //instance가 NULL, 시스템 상에서 instance가 존재하지 않을 때
         {
             instance = this;                                    //내 자신에 instance를 삽입
@@ -79,14 +79,15 @@ public class GameManager : MonoBehaviour
             Health = loadedData.Health;
             Stress = loadedData.Stress;
             GameTime = loadedData.GameTime;
-            EndTime = loadedData.EndTime;
             BuffTime = loadedData.BuffTime;
+            EndTime = loadedData.EndTime;
+            Second = loadedData.Second;
             //앞으로 GameManager에서 관리할 변수들은 여기에도 추가해야함.
         }
     }
 
     // 게임 종료 시에 호출되는 함수
-    private void OnApplicationQuit()
+    private void save()
     {
         PlayerData playerData = new PlayerData
         {
@@ -95,10 +96,17 @@ public class GameManager : MonoBehaviour
             Health = Health,
             Stress = Stress,
             GameTime = GameTime,
-            EndTime = EndTime,
             BuffTime = BuffTime,
+            EndTime = EndTime,
+            Second = Second,
             //앞으로 GameManager에서 관리할 변수들은 여기에도 추가해야함.
+
         };
+
         SavePlayerData(playerData);
+    }
+    public void Update()
+    {
+        save();
     }
 }
