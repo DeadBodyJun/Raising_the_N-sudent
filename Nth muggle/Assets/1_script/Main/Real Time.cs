@@ -10,13 +10,13 @@ public class RealTime : MonoBehaviour
     public Text TimeText;       // 시간을 UI로 보여줄 Text형 변수
     private bool isScreenOn = true; // 화면 상태 저장
     private float ingTime = 0f; // 경과 시간
-    private int NowYear;
+    private int NowYear; //시작 시간
     private int NowMonth;
     private int NowDay;
     private int NowHour;
     private int NowMinute;
     private int NowSecond;
-    private int MinusYear;
+    private int MinusYear; //차이 시간
     private int MinusMonth;
     private int MinusDay;
     private int MinusHour;
@@ -26,13 +26,15 @@ public class RealTime : MonoBehaviour
 
     void Start()
     {
+        //시작 시간값
         NowYear = DateTime.Now.Year;
         NowMonth = DateTime.Now.Month;
         NowDay = DateTime.Now.Day;
         NowHour = DateTime.Now.Hour;
         NowMinute = DateTime.Now.Minute;
         NowSecond = DateTime.Now.Second;
-        if(NowYear > GameManager.instance.Year)
+        // 차이 값
+        if(NowYear >= GameManager.instance.Year)
         {
             if(NowMonth >= GameManager.instance.Month)
             {
@@ -81,6 +83,8 @@ public class RealTime : MonoBehaviour
             }
             MinusYear = NowYear - GameManager.instance.Year;
         }
+        
+        GameManager.instance.TotalMinus = MinusMonth * 2592000 + MinusDay * 86400 + MinusHour * 3600 + MinusMinute * 60;      //차이값 초로 변환
         Debug.Log("시작" + NowYear + "년" + NowMonth+ "월" + NowDay + "일" + NowHour + "시" + NowMinute + "분" + NowSecond + "초");
         Debug.Log("종료" + GameManager.instance.Year + "년" + GameManager.instance.Month + "월" + GameManager.instance.Day + "일"
             + GameManager.instance.Hour + "시" + GameManager.instance.Minute + "분" + GameManager.instance.Second + "초");
@@ -90,11 +94,12 @@ public class RealTime : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameManager.instance.Second = DateTime.Now.Year;
-        GameManager.instance.Second = DateTime.Now.Month;
-        GameManager.instance.Second = DateTime.Now.Day;
-        GameManager.instance.Second = DateTime.Now.Hour;
-        GameManager.instance.Second = DateTime.Now.Minute;
+        //종료시간 값을 구하기 위한 현재시간 계속 업데이트
+        GameManager.instance.Year = DateTime.Now.Year;
+        GameManager.instance.Month = DateTime.Now.Month;
+        GameManager.instance.Day = DateTime.Now.Day;
+        GameManager.instance.Hour = DateTime.Now.Hour;
+        GameManager.instance.Minute = DateTime.Now.Minute;
         GameManager.instance.Second = DateTime.Now.Second;
 
         if (isScreenOn) // 화면이 켜져 있는 동안에만 실행

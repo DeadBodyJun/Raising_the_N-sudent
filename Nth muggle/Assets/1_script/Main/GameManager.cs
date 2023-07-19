@@ -22,6 +22,7 @@ public class PlayerData
     public int Hour;
     public int Minute;
     public int Second;
+    public int TotalMinus;
     //앞으로 GameManager에서 관리할 변수들은 여기에도 추가해야함.
 }
 
@@ -34,12 +35,13 @@ public class GameManager : MonoBehaviour
     public int Stress = 0;
     public double GameTime = 31104000;                    //게임시간 360일로 초기화
     public int BuffTime = 50;
-    public int Year;
-    public int Month;
-    public int Day;
-    public int Hour;
-    public int Minute;
-    public int Second;
+    public int Year;                                       //종료시간 년  k
+    public int Month;                                      //종료시간 월  k  
+    public int Day;                                        //종료시간 일  k
+    public int Hour;                                       //종료시간 시  k
+    public int Minute;                                     //종료시간 분  k
+    public int Second;                                     //종료시간 초  k
+    public int TotalMinus;                                 //현재시간 - 종료시간 -> 초 로 바꿈  k
 
     private string savePath;
 
@@ -94,6 +96,7 @@ public class GameManager : MonoBehaviour
             Hour = loadedData.Hour;
             Minute = loadedData.Minute;
             Second = loadedData.Second;
+            TotalMinus = loadedData.TotalMinus;
             //앞으로 GameManager에서 관리할 변수들은 여기에도 추가해야함.
         }
     }
@@ -114,7 +117,8 @@ public class GameManager : MonoBehaviour
             Day = Day,
             Hour = Hour,
             Minute = Minute,
-            Second = Second
+            Second = Second,
+            TotalMinus = TotalMinus
             //앞으로 GameManager에서 관리할 변수들은 여기에도 추가해야함.
 
         };
