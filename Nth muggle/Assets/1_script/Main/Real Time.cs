@@ -16,10 +16,16 @@ public class RealTime : MonoBehaviour
     private int NowHour;
     private int NowMinute;
     private int NowSecond;
+    private int MinusYear;
+    private int MinusMonth;
+    private int MinusDay;
+    private int MinusHour;
+    private int MinusMinute;
+    private int MinusSecond;
+
 
     void Start()
     {
-        Debug.Log(GameManager.instance.EndTime);
         NowYear = DateTime.Now.Year;
         NowMonth = DateTime.Now.Month;
         NowDay = DateTime.Now.Day;
@@ -38,49 +44,47 @@ public class RealTime : MonoBehaviour
                         {
                             if(NowSecond >= GameManager.instance.Second)
                             {
-                                NowSecond = NowSecond - GameManager.instance.Second; // 2023/7/19/11/34/50
-                            }                                                        // 2024/4/20/8/56/30
+                                MinusSecond = NowSecond - GameManager.instance.Second;
+                            }                                                        
                             else
                             {
-                                NowSecond = 60 - (GameManager.instance.Second - NowSecond);
+                                MinusSecond = 60 - (GameManager.instance.Second - NowSecond);
                                 NowMinute--;
                             }
-                            NowMinute = NowMinute - GameManager.instance.Minute;
+                            MinusMinute = NowMinute - GameManager.instance.Minute;
                         }
                         else
                         {
-                            NowMinute = 60 - (GameManager.instance.Minute - NowMinute);
+                            MinusMinute = 60 - (GameManager.instance.Minute - NowMinute);
                             NowHour--;
                         }
-                        NowHour = NowHour - GameManager.instance.Hour;
+                        MinusHour = NowHour - GameManager.instance.Hour;
                     }
                     else
                     {
-                        NowHour = 24 - (GameManager.instance.Hour - NowHour);
+                        MinusHour = 24 - (GameManager.instance.Hour - NowHour);
                         NowDay--;
                     }
-                    NowDay = NowDay - GameManager.instance.Day;
+                    MinusDay = NowDay - GameManager.instance.Day;
                 }
                 else
                 {
-                    NowDay = 30 - (GameManager.instance.Day - NowDay);
+                    MinusDay = 30 - (GameManager.instance.Day - NowDay);
                     NowMonth--;
                 }
-                NowMonth = NowMonth - GameManager.instance.Month;
+                MinusMonth = NowMonth - GameManager.instance.Month;
             }
             else
             {
-                NowMonth = 12 - (GameManager.instance.Month - NowMonth);
+                MinusMonth = 12 - (GameManager.instance.Month - NowMonth);
                 NowYear--;
             }
-            NowYear = NowYear - GameManager.instance.Year;
+            MinusYear = NowYear - GameManager.instance.Year;
         }
-        Debug.Log(NowYear);
-        Debug.Log(NowMonth);
-        Debug.Log(NowDay);
-        Debug.Log(NowHour);
-        Debug.Log(NowMinute);
-        Debug.Log(NowSecond);
+        Debug.Log("시작" + NowYear + "년" + NowMonth+ "월" + NowDay + "일" + NowHour + "시" + NowMinute + "분" + NowSecond + "초");
+        Debug.Log("종료" + GameManager.instance.Year + "년" + GameManager.instance.Month + "월" + GameManager.instance.Day + "일"
+            + GameManager.instance.Hour + "시" + GameManager.instance.Minute + "분" + GameManager.instance.Second + "초");
+        Debug.Log("차이" + MinusYear + "년" + MinusMonth + "월" + MinusDay + "일" + MinusHour + "시" + MinusMinute + "분" + MinusSecond + "초");
     }
 
     // Update is called once per frame
@@ -100,7 +104,7 @@ public class RealTime : MonoBehaviour
             {
                 if (ingTime >= 1) // 2초 간격으로
                 {
-                    GameManager.instance.GameTime -= 900;
+                    GameManager.instance.GameTime -= 1800;
                     ingTime = 0f; // 경과 시간 초기화
                 }
             }
@@ -108,12 +112,7 @@ public class RealTime : MonoBehaviour
             {
                 GameManager.instance.GameTime = 31104000;   // 게임시간이 끝나면 다시 360일로 초기화
             }
-            TimeText.text = "   D-day: " + (int)GameManager.instance.GameTime / 360 + "일";    // 초 값으로 저장된 게임시간을 일 값으로 바꿔서 text에 저장
+            TimeText.text = "   D-day: " + (int)GameManager.instance.GameTime / 86400 + "일";    // 초 값으로 저장된 게임시간을 일 값으로 바꿔서 text에 저장
         }
     }
-    private void OnApplicationQuit()
-    {
-
-    }
-
 }

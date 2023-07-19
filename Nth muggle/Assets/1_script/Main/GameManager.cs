@@ -22,7 +22,6 @@ public class PlayerData
     public int Hour;
     public int Minute;
     public int Second;
-    public DateTime EndTime;
     //앞으로 GameManager에서 관리할 변수들은 여기에도 추가해야함.
 }
 
@@ -41,7 +40,6 @@ public class GameManager : MonoBehaviour
     public int Hour;
     public int Minute;
     public int Second;
-    public DateTime EndTime;
 
     private string savePath;
 
@@ -96,7 +94,6 @@ public class GameManager : MonoBehaviour
             Hour = loadedData.Hour;
             Minute = loadedData.Minute;
             Second = loadedData.Second;
-            EndTime = loadedData.EndTime;
             //앞으로 GameManager에서 관리할 변수들은 여기에도 추가해야함.
         }
     }
@@ -117,8 +114,7 @@ public class GameManager : MonoBehaviour
             Day = Day,
             Hour = Hour,
             Minute = Minute,
-            Second = Second,
-            EndTime = EndTime
+            Second = Second
             //앞으로 GameManager에서 관리할 변수들은 여기에도 추가해야함.
 
         };

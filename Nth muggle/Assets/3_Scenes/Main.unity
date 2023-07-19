@@ -358,8 +358,13 @@ MonoBehaviour:
   Money: 0
   Health: 1
   Stress: 0
-  GameTime: 31536000
+  GameTime: 31104000
   BuffTime: 50
+  Year: 0
+  Month: 0
+  Day: 0
+  Hour: 0
+  Minute: 0
   Second: 0
 --- !u!1 &705507993
 GameObject:
@@ -532,8 +537,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -202.5, y: 836.99976}
-  m_SizeDelta: {x: 677.42, y: 140}
+  m_AnchoredPosition: {x: -54.355, y: 836.99976}
+  m_SizeDelta: {x: 973.71, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &963194225
 GameObject:
