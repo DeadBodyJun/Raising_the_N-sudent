@@ -33,8 +33,12 @@ public class RealTime : MonoBehaviour
         NowHour = DateTime.Now.Hour;
         NowMinute = DateTime.Now.Minute;
         NowSecond = DateTime.Now.Second;
+        //Debug.Log("시작" + NowYear + "년" + NowMonth + "월" + NowDay + "일" + NowHour + "시" + NowMinute + "분" + NowSecond + "초");
+        //Debug.Log("종료" + GameManager.instance.Year + "년" + GameManager.instance.Month + "월" + GameManager.instance.Day + "일"
+        //  + GameManager.instance.Hour + "시" + GameManager.instance.Minute + "분" + GameManager.instance.Second + "초");
+        //Debug.Log("이전GameTime" + GameManager.instance.GameTime);
         // 차이 값
-        if(NowYear >= GameManager.instance.Year)
+        if (NowYear >= GameManager.instance.Year)
         {
             if(NowMonth >= GameManager.instance.Month)
             {
@@ -83,15 +87,17 @@ public class RealTime : MonoBehaviour
             }
             MinusYear = NowYear - GameManager.instance.Year;
         }
-        
-        GameManager.instance.TotalMinus = MinusMonth * 2592000 + MinusDay * 86400 + MinusHour * 3600 + MinusMinute * 60;      //차이값 초로 변환
-        Debug.Log("시작" + NowYear + "년" + NowMonth+ "월" + NowDay + "일" + NowHour + "시" + NowMinute + "분" + NowSecond + "초");
-        Debug.Log("종료" + GameManager.instance.Year + "년" + GameManager.instance.Month + "월" + GameManager.instance.Day + "일"
-            + GameManager.instance.Hour + "시" + GameManager.instance.Minute + "분" + GameManager.instance.Second + "초");
-        Debug.Log("차이" + MinusYear + "년" + MinusMonth + "월" + MinusDay + "일" + MinusHour + "시" + MinusMinute + "분" + MinusSecond + "초");
+        //Debug.Log("차이" + MinusYear + "년" + MinusMonth + "월" + MinusDay + "일" + MinusHour + "시" + MinusMinute + "분" + MinusSecond + "초");
+
+        GameManager.instance.TotalMinus = (MinusMonth * 2592000) + (MinusDay * 86400) + (MinusHour * 3600) + (MinusMinute * 60) + MinusSecond;      //차이값 초로 변환
+        GameManager.instance.GameTime -= GameManager.instance.TotalMinus * 1800;       // 기존 D-Day - 백그라운드 시간값
+
+        //Debug.Log(GameManager.instance.TotalMinus);
+        //Debug.Log("토탈GameTime" + GameManager.instance.GameTime);
+
+
     }
 
-    // Update is called once per frame
     void Update()
     {
         //종료시간 값을 구하기 위한 현재시간 계속 업데이트
@@ -105,6 +111,7 @@ public class RealTime : MonoBehaviour
         if (isScreenOn) // 화면이 켜져 있는 동안에만 실행
         {
             ingTime += Time.deltaTime; // 경과 시간 누적
+            TimeText.text = "   D-day: " + (int)GameManager.instance.GameTime / 86400 + "일";    // 초 값으로 저장된 게임시간을 일 값으로 바꿔서 text에 저장
             if (GameManager.instance.GameTime >= 0)
             {
                 if (ingTime >= 1) // 2초 간격으로
@@ -117,7 +124,6 @@ public class RealTime : MonoBehaviour
             {
                 GameManager.instance.GameTime = 31104000;   // 게임시간이 끝나면 다시 360일로 초기화
             }
-            TimeText.text = "   D-day: " + (int)GameManager.instance.GameTime / 86400 + "일";    // 초 값으로 저장된 게임시간을 일 값으로 바꿔서 text에 저장
         }
     }
 }
