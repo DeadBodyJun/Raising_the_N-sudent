@@ -1,3 +1,4 @@
+// 터치 지능 값 구하는 스크립트
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,9 +10,6 @@ using UnityEngine.SceneManagement;
 
 public class GetKnowledge : MonoBehaviour
 {
-    public AudioSource audioSource;     // AudioSource ������Ʈ
-    public AudioClip touchSound;        // ��ġ ȿ���� AudioClip
-
     public void Start()
     {
 
@@ -19,33 +17,27 @@ public class GetKnowledge : MonoBehaviour
 
     public void Click()
     {
-        GameManager.instance.Knolge += GameManager.instance.TouchKnolge;
-    }
+        GameManager.instance.Knolge += 2;          //게임매니저에 있는 지능값 증가
 
+    }
     public void Update()
     {
-        if (Input.touchCount > 0)
+        if (Input.touchCount > 0)                                                          //터치 카운트가 0보다 클 경우, 즉 터치가 될 경우
         {
-            if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+            if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))    //만약 UI부분을 터치할 경우
             {
-                return;
+                return;                                                                     //아무 효과도 없음
             }
             else
             {
-                if (Input.GetTouch(0).phase == TouchPhase.Began)
+                if (Input.GetTouch(0).phase == TouchPhase.Began)                            //터치 1회 실행할 경우
                 {
-                    GameManager.instance.Knolge += GameManager.instance.TouchKnolge;
-                    PlayTouchSound();   // ��ġ ȿ���� ���
+                    GameManager.instance.Knolge += 2;
+                    Debug.Log("knowledge");
+                    SFXManager.Instance.PlayScreenTouchSound();
                 }
             }
         }
     }
 
-    private void PlayTouchSound()
-    {
-        if (audioSource != null && touchSound != null)
-        {
-            audioSource.PlayOneShot(touchSound);
-        }
-    }
 }
