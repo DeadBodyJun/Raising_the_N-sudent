@@ -1,36 +1,43 @@
+// í„°ì¹˜ ì§€ëŠ¥ ê°’ êµ¬í•˜ëŠ” ìŠ¤í¬ë¦½íŠ¸
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
-public class MakeMoney : MonoBehaviour
+public class GetKnowledge : MonoBehaviour
 {
-    public AudioSource audioSource;     // AudioSource ÄÄÆ÷³ÍÆ®
-    public AudioClip moneySound;        // ÅÍÄ¡ È¿°úÀ½ AudioClip
-
-    // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
-        
+
     }
+
     public void Click()
     {
-        GameManager.instance.Money += 2;          //°ÔÀÓ¸Å´ÏÀú¿¡ ÀÖ´Â Áö´É°ª Áõ°¡
-        Debug.Log("Money");
-        
-        PlayMoneySound();   // ÅÍÄ¡ È¿°úÀ½ Àç»ı
-    }
+        GameManager.instance.Knolge += 2;          //ê²Œì„ë§¤ë‹ˆì €ì— ìˆëŠ” ì§€ëŠ¥ê°’ ì¦ê°€
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
-
-    private void PlayMoneySound()
+    public void Update()
     {
-        if (audioSource != null && moneySound != null)
+        if (Input.touchCount > 0)                                                          //í„°ì¹˜ ì¹´ìš´íŠ¸ê°€ 0ë³´ë‹¤ í´ ê²½ìš°, ì¦‰ í„°ì¹˜ê°€ ë  ê²½ìš°
         {
-            audioSource.PlayOneShot(moneySound);
+            if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))    //ë§Œì•½ UIë¶€ë¶„ì„ í„°ì¹˜í•  ê²½ìš°
+            {
+                return;                                                                     //ì•„ë¬´ íš¨ê³¼ë„ ì—†ìŒ
+            }
+            else
+            {
+                if (Input.GetTouch(0).phase == TouchPhase.Began)                            //í„°ì¹˜ 1íšŒ ì‹¤í–‰í•  ê²½ìš°
+                {
+                    GameManager.instance.Knolge += 2;
+                    Debug.Log("knowledge");
+                    SFXManager.Instance.PlayScreenTouchSound();
+                }
+            }
         }
     }
+
 }
