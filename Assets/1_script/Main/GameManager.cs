@@ -6,6 +6,8 @@ using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class PlayerData
@@ -17,12 +19,14 @@ public class PlayerData
     public double GameTime;
     public int BuffTime;
     public float TouchKnolge;
+    public string Name;
     //앞으로 GameManager에서 관리할 변수들은 여기에도 추가해야함.
 }
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;               //static을 선언하여 다른 오브젝트 안의 스트립트에서도 호출 가능
+    public string Name;
     public float Knolge=0;                                       //기본 지능 수치
     public int Money=0;
     public float Health = 1f;
@@ -31,6 +35,7 @@ public class GameManager : MonoBehaviour
     public int BuffTime = 50;
     public float TouchKnolge = 0;
 
+    
     private string savePath;
 
     public void Awake()
@@ -103,6 +108,38 @@ public class GameManager : MonoBehaviour
         // go.GetComponent<UnityEngine.UI.Image>().sprite = icon;
     }
 
+    public GameObject creat;	// 플레이어 닉네임 입력UI
+    public Text newPlayerName;	// 새로 입력된 플레이어의 닉네임
+
+    bool savefile=false;	// 세이브파일 존재유무 저장
+    public void Slot()	// 슬롯의 기능 구현
+    {
+        if (savefile == true)	// bool 배열에서 현재 슬롯번호가 true라면 = 데이터 존재한다는 뜻
+        {
+            //GameManager.instance.LoadPlayerData();	// 데이터를 로드하고
+            GoGame();	// 게임씬으로 이동
+        }
+        else	// bool 배열에서 현재 슬롯번호가 false라면 데이터가 없다는 뜻
+        {
+            Creat();	// 플레이어 닉네임 입력 UI 활성화
+        }
+    }
+
+    public void Creat()	// 플레이어 닉네임 입력 UI를 활성화하는 메소드
+    {
+        creat.gameObject.SetActive(true);
+    }
+
+    public void GoGame()	// 게임씬으로 이동
+    {
+        if (savefile == false)	// 현재 슬롯번호의 데이터가 없다면
+        {
+            GameManager.instance.name = newPlayerName.text; // 입력한 이름을 복사해옴
+            //GameManager.instance.SavePlayerData(); // 현재 정보를 저장함.
+        }
+        SceneManager.LoadScene("main"); // 게임씬으로 이동
+    }
+
     // 데이터를 JSON으로 직렬화하여 저장하는 함수
     private void SavePlayerData(PlayerData playerData)
     {
@@ -119,6 +156,7 @@ public class GameManager : MonoBehaviour
             PlayerData loadedData = JsonUtility.FromJson<PlayerData>(jsonData);
 
             // 불러온 데이터를 현재 변수에 적용
+            Name = loadedData.Name;
             Knolge = loadedData.Knolge;
             Money = loadedData.Money;
             Health = loadedData.Health;
@@ -135,6 +173,7 @@ public class GameManager : MonoBehaviour
     {
         PlayerData playerData = new PlayerData
         {
+            Name = Name,
             Knolge = Knolge,
             Money = Money,
             Health = Health,

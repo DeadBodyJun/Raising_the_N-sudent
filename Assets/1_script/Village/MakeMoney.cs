@@ -39,6 +39,7 @@ public class MakeMoney : MonoBehaviour
             CoolTime = 1;
             GameManager.instance.Money += 10;
             GameManager.instance.Health -= 5;
+            GameManager.instance.GameTime -= 3600;
             StartCoroutine(SkillCoroutine());
         }
         else
