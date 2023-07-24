@@ -2,14 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class BGMManager : MonoBehaviour
 {
-    //sound¸¦ ÇÑ°÷¿¡¼­ °ü¸®ÇÒ ¼ö ÀÖµµ·Ï ÇÏ´Â singleton ÆĞÅÏ
+    //soundë¥¼ í•œê³³ì—ì„œ ê´€ë¦¬í•  ìˆ˜ ìˆë„ë¡ í•˜ëŠ” singleton íŒ¨í„´
     private static BGMManager _instance;
 
     public AudioSource bgSound;
     public AudioClip[] bglist;
+
+    public void SetMusicVolume(float volume)
+    {
+        bgSound.volume = volume;
+    }
 
     private void Awake()
     {
@@ -24,11 +30,11 @@ public class BGMManager : MonoBehaviour
             return; // Ensure that the duplicated object is destroyed immediately
         }
 
-        //sceneÀÌ ÀüÈ¯µÇ¾îµµ object°¡ ¾ø¾îÁöÁö ¾Êµµ·ÏÇÔ.
+        //sceneì´ ì „í™˜ë˜ì–´ë„ objectê°€ ì—†ì–´ì§€ì§€ ì•Šë„ë¡í•¨.
         DontDestroyOnLoad(gameObject);
     }
 
-    //SceneÀÌ ·ÎµùµÆÀ»¶§ ÇØ´ç Scene ÀÌ¸§°ú °°Àº ÀÌ¸§ Bgm Àç»ı
+    //Sceneì´ ë¡œë”©ëì„ë•Œ í•´ë‹¹ Scene ì´ë¦„ê³¼ ê°™ì€ ì´ë¦„ Bgm ì¬ìƒ
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
         for (int i = 0; i < bglist.Length; i++)
@@ -44,12 +50,12 @@ public class BGMManager : MonoBehaviour
         }
     }
 
-    //Bgm ÇÃ·¹ÀÌ ÇÔ¼ö
+    //Bgm í”Œë ˆì´ í•¨ìˆ˜
     public void BgSoundPlay(AudioClip clip)
     {
         bgSound.clip = clip;
         bgSound.loop = true;
-        bgSound.volume = 0.1f;
+        bgSound.volume = 1.0f;
         bgSound.Play();
     }
 }
